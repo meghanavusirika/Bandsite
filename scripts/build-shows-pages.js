@@ -1,12 +1,43 @@
+var shows = [
+  {
+    date: "Mon Dec 17 2018",
+    venue: "Ronald Lane",
+    location: "San Francisco, CA"
+  },
+  {
+    date: "Tue Jul 18 2019",
+    venue: "Pier 3 East",
+    location: "San Francisco, CA"
+  },
+  {
+    date: "Fri Jul 22 2019",
+    venue: "View Lounge",
+    location: "San Francisco, CA"
+  },
+  {
+    date: "Sat Aug 12 2019",
+    venue: "Hyatt Agency",
+    location: "San Francisco, CA"
+  },
+  {
+    date: "Fri Sep 05 2019",
+    venue: "Moscow Center",
+    location: "San Francisco, CA"
+  },
+  {
+    date: "Wed Aug 11 2019",
+    venue: "Pres Club",
+    location: "San Francisco, CA"
+  }
+];
+
 function table(arr) {
-  //container that holds it all ("mother-container")
   let tableContainer = document.querySelector(".shows__container");
 
   let titleContainer = document.createElement("div");
   titleContainer.classList.add("shows__title-container");
   tableContainer.appendChild(titleContainer);
 
-  //Shows Header Title
   let title = document.createElement("h1");
   title.classList.add("shows__title");
   titleContainer.appendChild(title);
@@ -16,7 +47,6 @@ function table(arr) {
   showsContainer.classList.add("shows__container-all");
   tableContainer.appendChild(showsContainer);
 
-  //header container for labels (tablet&desktop)
   let headerContainer = document.createElement("div");
   headerContainer.classList.add("shows__header-container");
   showsContainer.appendChild(headerContainer);
@@ -42,13 +72,11 @@ function table(arr) {
 
   buttonHeader.innerText = "BUY TICKETS";
 
-  for (let i = 0; i < arr.length; i++) {
-    //Container for all
+  for (let i = 0; i < shows.length; i++) {
     let oneContainer = document.createElement("div");
     oneContainer.classList.add("shows__one-container");
     showsContainer.appendChild(oneContainer);
 
-    //Dates
     let dateLabel = document.createElement("h3");
     dateLabel.classList.add("shows__one-container--date-label");
     oneContainer.appendChild(dateLabel);
@@ -60,7 +88,6 @@ function table(arr) {
 
     date.innerText = arr[i]["date"];
 
-    //Venues
     let venueLabel = document.createElement("h3");
     venueLabel.classList.add("shows__one-container--venue-label");
     oneContainer.appendChild(venueLabel);
@@ -70,9 +97,7 @@ function table(arr) {
     venue.classList.add("shows__one-container--venue");
     oneContainer.appendChild(venue);
 
-    venue.innerText = arr[i]["place"];
-
-    //Location
+    venue.innerText = arr[i]["venue"];
     let locationLabel = document.createElement("h3");
     locationLabel.classList.add("shows__one-container--location-label");
     oneContainer.appendChild(locationLabel);
@@ -83,8 +108,6 @@ function table(arr) {
     oneContainer.appendChild(location);
 
     location.innerText = arr[i]["location"];
-
-    //Button
     let buttonContainer = document.createElement("div");
     buttonContainer.classList.add("shows__one-container--button-container");
     oneContainer.appendChild(buttonContainer);
@@ -96,15 +119,4 @@ function table(arr) {
     button.innerText = "BUY TICKETS";
   }
 }
-// table(arr);
-
-let showsData = axios.get(
-  "https://project-1-api.herokuapp.com/showdates?api_key=philipb"
-);
-showsData.then(response => {
-  table(response.data);
-  console.log(response.data);
-});
-showsData.catch(error => {
-  console.log("you did something wrong");
-});
+table(shows);

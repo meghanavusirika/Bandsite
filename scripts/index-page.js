@@ -1,133 +1,122 @@
-//unique API key
-const apiKey = "eb7a6afd-dd93-4675-99a8-e4168cb34a65";
-// URL where all my comment information is stored:
-//project-1-api.herokuapp.com/?api_key=eb7a6afd-dd93-4675-99a8-e4168cb34a65
+let comments = [
+  {
+    name: "Micheal Lyons",
+    date: "12/18/2018",
+    comment:
+      "They BLEW the ROOF off at their last show, once everyone started figuring out they were going. This is still simply the greatest opening of a concert I have EVER witnessed."
+  },
+  {
+    name: "Gary Wong",
+    date: "12/12/2018",
+    comment:
+      "Every time I see him shred I feel so motivated to get off my couch and hop on my board. He’s so talented! I wish I can ride like him one day so I can really enjoy myself!"
+  },
+  {
+    name: "Theodore Duncan",
+    date: "11/15/2018",
+    comment:
+      "How can someone be so good!!! You can tell he lives for this and loves to do it every day. Everytime I see him I feel instantly happy! He’s definitely my favorite ever!"
+  }
+];
 
-//Function start for my default comments
 function displayComments(arr) {
-  //Used DOM  API to connect my JS to my HTML with the empty div I created
   let commentContainer = document.querySelector(".comment__default-comment");
-  commentContainer.innerHTML = "";
 
   for (let i = 0; i < arr.length; i++) {
-    //changes ms to actual date
-    let m = new Date(arr[i]["timestamp"]);
-    let dateString =
-      m.getUTCMonth() + 1 + "/" + m.getUTCDate() + "/" + m.getUTCFullYear();
-
-    //Div that holds all of my default comment content
     let defaultContainer = document.createElement("div");
     defaultContainer.classList.add("comment__default");
     commentContainer.appendChild(defaultContainer);
 
-    //image container
     let imageContainer = document.createElement("div");
     imageContainer.classList.add("comment__image-container-one");
     defaultContainer.appendChild(imageContainer);
 
-    // div that holds my header elements of my default comments
     let headerContainer = document.createElement("div");
     headerContainer.classList.add("comment__header");
     defaultContainer.appendChild(headerContainer);
 
-    //image
     let image = document.createElement("div");
     image.classList.add("comment__header--image-one");
     imageContainer.appendChild(image);
 
-    //name
     let name = document.createElement("h2");
     name.classList.add("comment__header--name");
     name.innerText = arr[i]["name"];
     headerContainer.appendChild(name);
 
-    //date
     let date = document.createElement("h3");
     date.classList.add("comment__header--date");
-    date.innerText = dateString;
+    date.innerText = arr[i]["date"];
     headerContainer.appendChild(date);
 
-    //comment container
     let textContainer = document.createElement("div");
     textContainer.classList.add("comment__text-container-default");
     defaultContainer.appendChild(textContainer);
 
-    //comment
     let comment = document.createElement("p");
     comment.classList.add("comment__text-container-default--comment");
     comment.innerText = arr[i]["comment"];
     textContainer.appendChild(comment);
-
-    //delete button container
-    let deleteButtonContainer = document.createElement("div");
-    deleteButtonContainer.classList.add("comment__delete-button-container");
-    defaultContainer.appendChild(deleteButtonContainer);
-
-    //delete
-    let deleteButton = document.createElement("button");
-    deleteButton.classList.add("comment__delete-button");
-    deleteButton.addEventListener("click", event => {
-      let varId = event.target.id;
-      deleteComment(varId);
-    });
-    deleteButton.id = arr[i]["id"];
-    deleteButton.innerText = "Remove";
-    deleteButtonContainer.appendChild(deleteButton);
   }
 }
+displayComments(comments);
 
-//use Dom APi to get access to the form in html
 const form = document.querySelector(".comment__input-container");
 
-//attach an event listener on the form of type submit in order to create new comments
 form.addEventListener("submit", submitEvent => {
-  //prevents page form reloading upon clicking submit button
   submitEvent.preventDefault();
 
-  //Post Comments
-  let newAdd = axios.post(
-    "https://project-1-api.herokuapp.com/comments?api_key=eb7a6afd-dd93-4675-99a8-e4168cb34a65",
-    {
-      name: submitEvent.target.name.value,
-      comment: submitEvent.target.comment.value
-    }
-  );
+  const newComment = {};
+  newComment.name = submitEvent.target.name.value;
+  newComment.comment = submitEvent.target.comment.value;
 
-  newAdd.then(() => {
-    //Get Comments
-    getComments();
-  });
+  let commentContainer = document.querySelector(".comment__default-comment");
 
-  //clears my input from the entry fields
+  let defaultContainer = document.createElement("div");
+  defaultContainer.classList.add("comment__default");
+  commentContainer.appendChild(defaultContainer);
+
+  let imageContainer = document.createElement("div");
+  imageContainer.classList.add("comment__image-container-one");
+  defaultContainer.appendChild(imageContainer);
+
+  let headerContainer = document.createElement("div");
+  headerContainer.classList.add("comment__header");
+  defaultContainer.appendChild(headerContainer);
+
+  let image = document.createElement("div");
+  image.classList.add("comment__header--image-one");
+  imageContainer.appendChild(image);
+
+  let name = document.createElement("h2");
+  name.classList.add("comment__header--name");
+  name.innerText = newComment.name;
+  headerContainer.appendChild(name);
+
+  let today = new Date();
+  let dd = String(today.getDate()).padStart(2, "0");
+  let mm = String(today.getMonth() + 1).padStart(2, "0");
+  let yyyy = today.getFullYear();
+
+  today = mm + "/" + dd + "/" + yyyy;
+
+  let date = document.createElement("h3");
+  date.innerText = today;
+  date.classList.add("comment__header--date");
+  headerContainer.appendChild(date);
+
+  let textContainer = document.createElement("div");
+  textContainer.classList.add("comment__text-container-default");
+  defaultContainer.appendChild(textContainer);
+
+  let comment = document.createElement("p");
+  comment.classList.add("comment__text-container-default--comment");
+  comment.innerText = newComment.comment;
+  textContainer.appendChild(comment);
+
+  let top = document.querySelector(".comment__default-comment");
+  top.insertBefore(defaultContainer, top.childNodes[0]);
+
   let clearInput = document.querySelector(".comment__input-container");
   clearInput.reset();
 });
-
-// function to get comments
-function getComments() {
-  axios
-    .get(
-      "https://project-1-api.herokuapp.com/comments?api_key=eb7a6afd-dd93-4675-99a8-e4168cb34a65"
-    )
-    .then(response => {
-      displayComments(
-        response.data.sort(function(a, b) {
-          return b.timestamp - a.timestamp;
-        })
-      );
-    });
-}
-
-//Get Comments
-getComments();
-
-//Delete Comments
-function deleteComment(id) {
-  axios
-    .delete(
-      `https://project-1-api.herokuapp.com/comments/${id}?api_key=eb7a6afd-dd93-4675-99a8-e4168cb34a65`
-    )
-    .then(response => {
-      getComments();
-    });
-}

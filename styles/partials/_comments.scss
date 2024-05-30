@@ -1,10 +1,10 @@
+/* mobile-styling-start */
 .comment {
   background-color: $white;
   margin: 0 1rem 0 1rem;
 
   &__title {
-    font-family: avenir-bold;
-    font-size: 1.5rem;
+    @include mobile-header;
     margin: 2rem 0 2.5rem;
   }
 
@@ -12,12 +12,12 @@
     width: 3rem;
     height: 3rem;
     border-radius: 2rem;
-    margin-top: 1.4rem;
+    margin: 1rem 1rem 0 0;
   }
 
   &__name-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     border-bottom: 1px solid $mercury;
   }
 
@@ -25,10 +25,8 @@
     display: flex;
     flex-direction: column;
     &--text {
-      font-family: avenir-demi;
+      @include mobile-labels;
       color: $silver;
-      font-size: 0.75rem;
-      line-height: 1.25rem;
       margin: 0 0 0.5rem 0;
     }
   }
@@ -107,7 +105,6 @@
       padding: 1.75rem 0 0 0;
     }
   }
-
   &__text-container-default {
     display: flex;
     &--comment {
@@ -117,19 +114,38 @@
       font-size: 0.8125rem;
       font-family: avenir-regular;
       margin: 0;
-      padding: 1rem 0 1.5rem 1rem;
+      padding: 1rem 0 1rem 1rem;
+    }
+  }
+  &__delete-button-container {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 1.5rem;
+  }
+  &__delete-button {
+    font-family: avenir-demi;
+    border-radius: 2px;
+    color: $black;
+    width: 4.5rem;
+    height: 1.75rem;
+    border: 1px solid $mercury;
+    background-color: $white;
+    &:hover {
+      color: $white;
+      background-color: $black;
     }
   }
 }
+/* mobile-styling-end */
 
+/* tablet-styling-start */
 @include medium {
   .comment {
     background-color: $white;
     margin: 0 1.5rem 0 1.5rem;
 
     &__title {
-      font-family: avenir-bold;
-      font-size: 2.25rem;
+      @include header-title;
       margin: 3rem 0 3.5rem;
     }
 
@@ -255,7 +271,6 @@
     &__text-container-default {
       display: flex;
       justify-content: flex-end;
-      border-bottom: 1px solid $mercury;
       &--comment {
         color: $black;
         width: 29rem;
@@ -267,15 +282,16 @@
     }
   }
 }
+/* tablet-styling-end */
 
+/* desktop-styling-start */
 @include large {
   .comment {
     background-color: $white;
     margin: 0 11.25rem 0 11.25rem;
 
     &__title {
-      font-family: avenir-bold;
-      font-size: 2.25rem;
+      @include header-title;
       margin: 3rem 0 3.5rem;
     }
 
@@ -348,3 +364,4 @@
     }
   }
 }
+/* desktop-styling-end */

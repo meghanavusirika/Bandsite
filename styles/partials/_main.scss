@@ -1,58 +1,48 @@
+/* mobile-styling-start */
 .main {
   margin: 0 1rem;
-
   &__title {
-    font-family: avenir-bold;
-    font-size: 1.5rem;
+    @include mobile-header;
     margin: 2rem 0 1.5rem 0;
   }
-
   &__container-image {
     height: 45.3125vw;
     margin: 0 0 1.5rem 0;
   }
-
   &__image {
     height: 100%;
     width: 100%;
   }
-
   &__sub-title {
-    font-family: avenir-demi;
-    font-size: 0.875rem;
-    line-height: 1.375rem;
+    @include mobile-subheader;
     margin: 0 2.2rem 2rem 0;
   }
   &__name {
-    font-family: avenir-regular;
-    font-size: 0.875rem;
+    @include mobile-subheader;
     margin: 0 0 2.5rem 0;
   }
   &__musicians {
-    font-family: avenir-demi;
-    font-size: 0.875rem;
+    @include mobile-subheader;
     margin: 0 0 1.5rem 0;
   }
   &__description--one {
-    font-family: avenir-regular;
-    font-size: 0.8125rem;
-    line-height: 1.125rem;
+    @include mobile-paragraph;
     margin: 0 0 1.5rem 0;
   }
   &__description--two {
-    font-family: avenir-regular;
-    font-size: 0.8125rem;
-    line-height: 1.125rem;
+    @include mobile-paragraph;
     margin: 0 0 2.5rem 0;
   }
 }
+/* mobile-styling-end */
+
+/* tablet-styling-start */
 @include medium {
   .main {
     margin: 0 1.5rem;
 
     &__title {
-      font-family: avenir-bold;
-      font-size: 2.25rem;
+      @include header-title;
       margin: 2rem 0 1.5rem 0;
     }
     &__container-image {
@@ -64,45 +54,39 @@
       width: 100%;
     }
     &__sub-title {
-      font-family: avenir-bold;
-      font-size: 1.5rem;
-      line-height: 2.75rem;
+      @include header-subtitle;
       margin: 0 0 2rem 0;
       width: 91vw;
     }
     &__name {
-      font-family: avenir-demi;
-      font-size: 1rem;
+      @include header-subheader;
       margin: 0 0 2.5rem 0;
     }
     &__musicians {
-      font-family: avenir-bold;
-      font-size: 1.5rem;
+      @include header-subtitle;
       margin: 0 0 1.5rem 0;
     }
     &__description-container {
       display: flex;
     }
     &__description--one {
-      font-family: avenir-regular;
-      font-size: 0.875rem;
-      line-height: 1.375rem;
+      @include tab-desk-paragraph;
       margin: 0 1.5rem 2.5rem 0;
     }
     &__description--two {
-      font-family: avenir-regular;
-      font-size: 0.875rem;
-      line-height: 1.375rem;
+      @include tab-desk-paragraph;
       margin: 0 0 2.5rem 0;
     }
   }
 }
+/* tablet-styling-end */
+
+/* desktop-styling-start */
 @include large {
   .main {
     margin: 0;
     &__title {
-      font-family: avenir-bold;
-      font-size: 2.25rem;
+      @include header-title;
       margin: 3rem 0 3rem 11.25rem;
     }
     &__container-image {
@@ -110,20 +94,16 @@
       margin: 0 17rem 3rem 17rem;
     }
     &__sub-title {
-      font-family: avenir-bold;
-      font-size: 1.5rem;
-      line-height: 2.75rem;
+      @include header-subtitle;
       margin: 0 0 2.5rem 17rem;
       width: 59vw;
     }
     &__name {
-      font-family: avenir-demi;
-      font-size: 1rem;
+      @include header-subheader;
       margin: 0 0 3.5rem 17rem;
     }
     &__musicians {
-      font-family: avenir-bold;
-      font-size: 1.5rem;
+      @include header-subtitle;
       margin: 0 0 2rem 17rem;
     }
     &__description-container {
@@ -131,16 +111,13 @@
       margin: 0 17rem 3rem 17rem;
     }
     &__description--one {
-      font-family: avenir-regular;
-      font-size: 0.875rem;
-      line-height: 1.375rem;
+      @include tab-desk-paragraph;
       margin: 0 2.5rem 0 0;
     }
     &__description--two {
-      font-family: avenir-regular;
-      font-size: 0.875rem;
-      line-height: 1.375rem;
+      @include tab-desk-paragraph;
       margin: 0;
     }
   }
 }
+/* desktop-styling-end */

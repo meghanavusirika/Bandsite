@@ -1,0 +1,18 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+  
+*,*::before,*::after {
+  box-sizing: inherit;
+}
+
+@import "./partials/breakpoints";
+@import "./partials/colors";
+@import "./partials/fonts";
+@import "./partials/navigation"
+@import "./partials/mixins";
+@import "./partials/footer";
+@import "./partials/hero-shows";
+@import "./partials/shows";
